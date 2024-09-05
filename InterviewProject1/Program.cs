@@ -13,10 +13,10 @@ Console.WriteLine($"Starting balance: {startingBalance.ToString("C", CultureInfo
 
 await bankAccountManager.Deposit(100);
 await bankAccountManager.Withdraw(50);
-await bankAccountManager.Withdraw(10.25);
+await bankAccountManager.Withdraw(10);
 await bankAccountManager.Deposit(200);
-await bankAccountManager.Withdraw(5.45);
-await bankAccountManager.Withdraw(75.30);
+await bankAccountManager.Withdraw(5);
+await bankAccountManager.Withdraw(75);
 
 var endingBalance = await bankAccountManager.GetBalance();
 

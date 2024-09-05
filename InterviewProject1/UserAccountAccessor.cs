@@ -33,7 +33,7 @@ namespace InterviewProject1
             });
             await SaveTransactionsToJsonAsync();
 
-            Console.WriteLine($"Deposit: ${amount.ToString("C", CultureInfo.CurrentCulture)}");
+            Console.WriteLine($"Deposit: {amount.ToString("C", CultureInfo.CurrentCulture)}");
         }
 
         /// <inheritdoc/>
@@ -47,7 +47,7 @@ namespace InterviewProject1
             });
             await SaveTransactionsToJsonAsync();
 
-            Console.WriteLine($"Withdrawal: ${amount.ToString("C", CultureInfo.CurrentCulture)}");
+            Console.WriteLine($"Withdrawal: {amount.ToString("C", CultureInfo.CurrentCulture)}");
         }
 
         /// <inheritdoc/>
