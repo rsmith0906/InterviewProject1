@@ -8,6 +8,7 @@ namespace InterviewProject1
         public static ServiceProvider GetServiceProvider()
         {
             ServiceCollection serviceCollection = new();
+            serviceCollection.AddSingleton<DbContext>();
             serviceCollection.AddScoped<IUserAccountAccessor, UserAccountAccessor>();
             serviceCollection.AddScoped<BankAccountManager>();
             return serviceCollection.BuildServiceProvider();

@@ -7,17 +7,17 @@ var diContainer = Startup.GetServiceProvider();
 
 var bankAccountManager = diContainer.GetRequiredService<BankAccountManager>();
 
-var startingBalance = await bankAccountManager.GetBalance();
+var startingBalance = await bankAccountManager.GetBalanceAsync();
 
 Console.WriteLine($"Starting balance: {startingBalance.ToString("C", CultureInfo.CurrentCulture)}");
 
-await bankAccountManager.Deposit(100);
-await bankAccountManager.Withdraw(50);
-await bankAccountManager.Withdraw(10);
-await bankAccountManager.Deposit(200);
-await bankAccountManager.Withdraw(5);
-await bankAccountManager.Withdraw(75);
+await bankAccountManager.DepositAsync(100);
+await bankAccountManager.WithdrawAsync(50);
+await bankAccountManager.WithdrawAsync(10);
+await bankAccountManager.DepositAsync(200);
+await bankAccountManager.WithdrawAsync(5);
+await bankAccountManager.WithdrawAsync(75);
 
-var endingBalance = await bankAccountManager.GetBalance();
+var endingBalance = await bankAccountManager.GetBalanceAsync();
 
 Console.WriteLine($"Ending balance: {endingBalance.ToString("C", CultureInfo.CurrentCulture)}");

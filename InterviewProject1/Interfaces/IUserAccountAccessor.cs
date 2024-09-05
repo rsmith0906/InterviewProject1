@@ -12,19 +12,19 @@ namespace InterviewProject1.Interfaces
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        Task AddDeposit(double amount);
+        Task AddDepositAsync(double amount);
 
         /// <summary>
         /// The get account history.
         /// </summary>
         /// <returns></returns>
-        Task<List<AccountTransaction>> GetAccountHistory();
+        Task<IEnumerable<AccountTransaction>> GetAccountHistoryAsync();
 
         /// <summary>
         /// The get balance.
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        Task WithdrawMoney(double amount);
+        Task WithdrawMoneyAsync(double amount);
     }
 }

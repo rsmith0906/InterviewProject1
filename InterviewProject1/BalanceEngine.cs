@@ -27,7 +27,7 @@ namespace InterviewProject1
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task<double> GetBalance()
+        public Task<double> GetBalanceAsync()
         {
             throw new NotImplementedException();
         }

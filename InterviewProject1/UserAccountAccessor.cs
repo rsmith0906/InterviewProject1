@@ -10,63 +10,58 @@ namespace InterviewProject1
     /// </summary>
     public class UserAccountAccessor : IUserAccountAccessor
     {
-        private List<AccountTransaction> transactions;
-        private readonly string transactionsJsonPath = Path.Combine(Directory.GetCurrentDirectory(), "transactions.json");
+        /// <summary>
+        /// DB Context.
+        /// </summary>
+        private readonly DbContext dbContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserAccountAccessor"/> class.
         /// </summary>
-        public UserAccountAccessor()
+        public UserAccountAccessor(DbContext dbContext)
         {
+            this.dbContext = dbContext;
         }
 
         /// <inheritdoc/>
-        public async Task AddDeposit(double amount)
+        public async Task AddDepositAsync(double amount)
         {
-            transactions = await GetAccountHistory();
+            var transactions = await this.dbContext.GetData<AccountTransaction>();
 
-            transactions.Add(new AccountTransaction()
+            transactions.ToList().Add(new AccountTransaction()
             {
                 Amount = amount,
                 Date = DateTime.UtcNow,
                 TransactionType = TransactionType.Deposit
             });
-            await SaveTransactionsToJsonAsync();
+
+            await this.dbContext.SaveData(transactions);
 
             Console.WriteLine($"Deposit: {amount.ToString("C", CultureInfo.CurrentCulture)}");
         }
 
         /// <inheritdoc/>
-        public async Task WithdrawMoney(double amount)
+        public async Task WithdrawMoneyAsync(double amount)
         {
-            transactions.Add(new AccountTransaction()
+            var transactions = await this.dbContext.GetData<AccountTransaction>();
+
+            transactions.ToList().Add(new AccountTransaction()
             {
                 Amount = amount,
                 Date = DateTime.UtcNow,
                 TransactionType = TransactionType.Withdrawal
             });
-            await SaveTransactionsToJsonAsync();
+
+            await this.dbContext.SaveData(transactions);
 
             Console.WriteLine($"Withdrawal: {amount.ToString("C", CultureInfo.CurrentCulture)}");
         }
 
         /// <inheritdoc/>
-        public async Task<List<AccountTransaction>> GetAccountHistory()
+        public async Task<IEnumerable<AccountTransaction>> GetAccountHistoryAsync()
         {
-            if (!File.Exists(transactionsJsonPath))
-            {
-                return new List<AccountTransaction>();
-            }
-
-            string json = await File.ReadAllTextAsync(transactionsJsonPath);
-            List<AccountTransaction> history = JsonSerializer.Deserialize<List<AccountTransaction>>(json);
-            return history;
-        }
-
-        private async Task SaveTransactionsToJsonAsync()
-        {
-            string json = JsonSerializer.Serialize(transactions);
-            await File.WriteAllTextAsync(transactionsJsonPath, json);
+            var transactions = await this.dbContext.GetData<AccountTransaction>();
+            return transactions;
         }
     }
 }

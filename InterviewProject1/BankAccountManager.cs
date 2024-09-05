@@ -34,29 +34,27 @@ namespace InterviewProject1
         /// Deposits the specified amount into the account.
         /// </summary>
         /// <param name="amount"></param>
-        /// <returns></returns>
-        public async Task Deposit(double amount)
+        public async Task DepositAsync(double amount)
         {
-            await this.userAccountAccessor.AddDeposit(amount);
+            await this.userAccountAccessor.AddDepositAsync(amount);
         }
 
         /// <summary>
         /// Withdraws the specified amount from the account.
         /// </summary>
         /// <param name="amount"></param>
-        /// <returns></returns>
-        public async Task Withdraw(double amount)
+        public async Task WithdrawAsync(double amount)
         {
-            await this.userAccountAccessor.WithdrawMoney(amount);
+            await this.userAccountAccessor.WithdrawMoneyAsync(amount);
         }
 
         /// <summary>
         /// Gets the balance of the account.
         /// </summary>
-        /// <returns></returns>
-        public async Task<double> GetBalance()
+        /// <returns>Account Balance.</returns>
+        public async Task<double> GetBalanceAsync()
         {
-            return await this.balanceEngine.GetBalance();
+            return await this.balanceEngine.GetBalanceAsync();
         }
     }
 }
