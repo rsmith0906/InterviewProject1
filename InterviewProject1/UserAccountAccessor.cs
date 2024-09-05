@@ -1,5 +1,6 @@
 ﻿using InterviewProject1.Interfaces;
 using InterviewProject1.Models;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json;
 
@@ -26,9 +27,9 @@ namespace InterviewProject1
         /// <inheritdoc/>
         public async Task AddDepositAsync(double amount)
         {
-            var transactions = await this.dbContext.GetData<AccountTransaction>();
+            var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
-            transactions.ToList().Add(new AccountTransaction()
+            transactions.Add(new AccountTransaction()
             {
                 Amount = amount,
                 Date = DateTime.UtcNow,
@@ -43,9 +44,9 @@ namespace InterviewProject1
         /// <inheritdoc/>
         public async Task WithdrawMoneyAsync(double amount)
         {
-            var transactions = await this.dbContext.GetData<AccountTransaction>();
+            var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
-            transactions.ToList().Add(new AccountTransaction()
+            transactions.Add(new AccountTransaction()
             {
                 Amount = amount,
                 Date = DateTime.UtcNow,
