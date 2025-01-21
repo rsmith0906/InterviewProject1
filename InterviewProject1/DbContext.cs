@@ -7,7 +7,7 @@ namespace InterviewProject1
     /// </summary>
     public class DbContext
     {
-        private readonly string dbFilePath = Path.Combine(Directory.GetCurrentDirectory(), "db.json");
+        private readonly string dbFilePath = Path.Combine(Path.GetTempPath(), "db.json");
 
         /// <summary>
         /// Get data.
