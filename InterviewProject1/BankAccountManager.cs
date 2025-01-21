@@ -13,48 +13,51 @@ namespace InterviewProject1
         private readonly BalanceEngine balanceEngine;
 
         /// <summary>
-        /// The user account accessor.
+        /// The account accessor.
         /// </summary>
-        private readonly IUserAccountAccessor userAccountAccessor;
+        private readonly IAccountAccessor accountAccessor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BankAccountManager"/> class.
         /// </summary>
-        /// <param name="balanceEngine"></param>
-        /// <param name="userAccountAccessor"></param>
+        /// <param name="balanceEngine">Balance engine.</param>
+        /// <param name="accountAccessor">Account accessor.</param>
         public BankAccountManager(
             BalanceEngine balanceEngine,
-            IUserAccountAccessor userAccountAccessor)
+            IAccountAccessor accountAccessor)
         {
             this.balanceEngine = balanceEngine;
-            this.userAccountAccessor = userAccountAccessor;
+            this.accountAccessor = accountAccessor;
         }
 
         /// <summary>
         /// Deposits the specified amount into the account.
         /// </summary>
+        /// <param name="accountId">The account unique Id.</param>
         /// <param name="amount"></param>
-        public async Task DepositAsync(double amount)
+        public async Task DepositAsync(Guid accountId, double amount)
         {
-            await this.userAccountAccessor.AddDepositAsync(amount);
+            await this.accountAccessor.AddDepositAsync(accountId, amount);
         }
 
         /// <summary>
         /// Withdraws the specified amount from the account.
         /// </summary>
+        /// <param name="accountId">The account unique Id.</param>
         /// <param name="amount"></param>
-        public async Task WithdrawAsync(double amount)
+        public async Task WithdrawAsync(Guid accountId, double amount)
         {
-            await this.userAccountAccessor.WithdrawMoneyAsync(amount);
+            await this.accountAccessor.WithdrawMoneyAsync(accountId, amount);
         }
 
         /// <summary>
         /// Gets the balance of the account.
         /// </summary>
+        /// <param name="accountId">The account unique Id.</param>
         /// <returns>Account Balance.</returns>
-        public async Task<double> GetBalanceAsync()
+        public async Task<double> GetBalanceAsync(Guid accountId)
         {
-            return await this.balanceEngine.GetBalanceAsync();
+            return await this.balanceEngine.GetBalanceAsync(accountId);
         }
     }
 }

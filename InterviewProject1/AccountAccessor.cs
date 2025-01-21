@@ -7,9 +7,9 @@ using System.Text.Json;
 namespace InterviewProject1
 {
     /// <summary>
-    /// The user account accessor.
+    /// The account accessor.
     /// </summary>
-    public class UserAccountAccessor : IUserAccountAccessor
+    public class AccountAccessor : IAccountAccessor
     {
         /// <summary>
         /// DB Context.
@@ -17,15 +17,15 @@ namespace InterviewProject1
         private readonly DbContext dbContext;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserAccountAccessor"/> class.
+        /// Initializes a new instance of the <see cref="AccountAccessor"/> class.
         /// </summary>
-        public UserAccountAccessor(DbContext dbContext)
+        public AccountAccessor(DbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
         /// <inheritdoc/>
-        public async Task AddDepositAsync(double amount)
+        public async Task AddDepositAsync(Guid accountId, double amount)
         {
             var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
@@ -42,7 +42,7 @@ namespace InterviewProject1
         }
 
         /// <inheritdoc/>
-        public async Task WithdrawMoneyAsync(double amount)
+        public async Task WithdrawMoneyAsync(Guid accountId, double amount)
         {
             var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
@@ -59,7 +59,7 @@ namespace InterviewProject1
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<AccountTransaction>> GetAccountHistoryAsync()
+        public async Task<IEnumerable<AccountTransaction>> GetAccountHistoryAsync(Guid accountId)
         {
             var transactions = await this.dbContext.GetData<AccountTransaction>();
             return transactions;

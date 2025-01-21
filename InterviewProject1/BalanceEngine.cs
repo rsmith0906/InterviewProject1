@@ -9,25 +9,26 @@ namespace InterviewProject1
     public class BalanceEngine
     {
         /// <summary>
-        /// The user account accessor.
+        /// The account accessor.
         /// </summary>
-        private readonly IUserAccountAccessor userAccountAccessor;
+        private readonly IAccountAccessor accountAccessor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BalanceEngine"/> class.
         /// </summary>
-        /// <param name="userAccountAccessor"></param>
-        public BalanceEngine(IUserAccountAccessor userAccountAccessor)
+        /// <param name="accountAccessor"></param>
+        public BalanceEngine(IAccountAccessor accountAccessor)
         {
-            this.userAccountAccessor = userAccountAccessor;
+            this.accountAccessor = accountAccessor;
         }
 
         /// <summary>
         /// Gets the balance of the account.
         /// </summary>
+        /// <param name="accountId">The account unique Id.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task<double> GetBalanceAsync()
+        public Task<double> GetBalanceAsync(Guid accountId)
         {
             throw new NotImplementedException();
         }

@@ -9,7 +9,7 @@ namespace InterviewProject1
         {
             ServiceCollection serviceCollection = new();
             serviceCollection.AddSingleton<DbContext>();
-            serviceCollection.AddScoped<IUserAccountAccessor, UserAccountAccessor>();
+            serviceCollection.AddScoped<IAccountAccessor, AccountAccessor>();
             serviceCollection.AddScoped<BankAccountManager>();
             return serviceCollection.BuildServiceProvider();
         }
