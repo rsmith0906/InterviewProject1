@@ -14,7 +14,7 @@ namespace InterviewProject1
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> GetData<T>()
+        public async Task<ICollection<T>> GetData<T>()
         {
             if (!File.Exists(this.dbFilePath))
             {
@@ -22,7 +22,7 @@ namespace InterviewProject1
             }
 
             string json = await File.ReadAllTextAsync(this.dbFilePath);
-            IEnumerable<T> data = JsonSerializer.Deserialize<IEnumerable<T>>(json);
+            ICollection<T> data = JsonSerializer.Deserialize<ICollection<T>>(json);
             return data;
         }
 

@@ -36,6 +36,7 @@ namespace InterviewProject1
 
             transactions.Add(new AccountTransaction()
             {
+                AccountId = accountId,
                 Amount = amount,
                 Date = DateTime.UtcNow,
                 TransactionType = TransactionType.Deposit
@@ -58,6 +59,7 @@ namespace InterviewProject1
 
             transactions.Add(new AccountTransaction()
             {
+                AccountId = accountId,
                 Amount = amount,
                 Date = DateTime.UtcNow,
                 TransactionType = TransactionType.Withdrawal
@@ -72,7 +74,7 @@ namespace InterviewProject1
         public async Task<IEnumerable<AccountTransaction>> GetAccountHistoryAsync(Guid accountId)
         {
             var transactions = await this.dbContext.GetData<AccountTransaction>();
-            return transactions;
+            return transactions.Where(transaction => transaction.AccountId == accountId);
         }
     }
 }

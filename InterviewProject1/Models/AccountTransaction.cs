@@ -6,6 +6,11 @@
     public class AccountTransaction
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the transaction.
+        /// </summary>
+        public Guid AccountId { get; set; }
+
+        /// <summary>
         /// Gets or sets the amount of the transaction.
         /// </summary>
         public double Amount { get; set; }
