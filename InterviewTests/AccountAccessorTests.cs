@@ -49,7 +49,6 @@ namespace InterviewTests
                await accountAccessor.AddDepositAsync(accountId, invalidDepositAmount));
 
             // Assert
-            // Assert
             Assert.AreEqual("amount", exception.ParamName);
             Assert.IsTrue(exception.Message.Contains("must be greater than", StringComparison.OrdinalIgnoreCase));
         }
