@@ -11,9 +11,9 @@ namespace InterviewProject1.Interfaces
         /// Add money ot the account.
         /// </summary>
         /// <param name="accountId">The account unique Id.</param>
-        /// <param name="amount"></param>
-        /// <returns>Task</returns>
-        Task AddDepositAsync(Guid accountId, double amount);
+        /// <param name="amount">Deposit amount.</param>
+        /// <returns>Transaction Id.</returns>
+        Task<Guid> AddDepositAsync(Guid accountId, double amount);
 
         /// <summary>
         /// The get account history.
@@ -26,8 +26,8 @@ namespace InterviewProject1.Interfaces
         /// Withdraw money from the account.
         /// </summary>
         /// <param name="accountId">The account unique Id.</param>
-        /// <param name="amount"></param>
+        /// <param name="amount">Withdraw amount.</param>
         /// <returns>Task</returns>
-        Task WithdrawMoneyAsync(Guid accountId, double amount);
+        Task<Guid> WithdrawMoneyAsync(Guid accountId, double amount);
     }
 }

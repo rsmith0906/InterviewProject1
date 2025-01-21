@@ -8,6 +8,11 @@
         /// <summary>
         /// Gets or sets the unique identifier for the transaction.
         /// </summary>
+        public Guid TransactionId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unique identifier for the account.
+        /// </summary>
         public Guid AccountId { get; set; }
 
         /// <summary>

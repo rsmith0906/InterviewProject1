@@ -25,17 +25,20 @@ namespace InterviewProject1
         }
 
         /// <inheritdoc/>
-        public async Task AddDepositAsync(Guid accountId, double amount)
+        public async Task<Guid> AddDepositAsync(Guid accountId, double amount)
         {
             if (amount <= 0)
             {
                 throw new ArgumentException("Amount must be greater than zero.");
             }
 
+            Guid transactionId = Guid.NewGuid();
+
             var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
             transactions.Add(new AccountTransaction()
             {
+                TransactionId = transactionId,
                 AccountId = accountId,
                 Amount = amount,
                 Date = DateTime.UtcNow,
@@ -45,20 +48,25 @@ namespace InterviewProject1
             await this.dbContext.SaveData(transactions);
 
             Console.WriteLine($"Deposit: {amount.ToString("C", CultureInfo.CurrentCulture)}");
+
+            return transactionId;
         }
 
         /// <inheritdoc/>
-        public async Task WithdrawMoneyAsync(Guid accountId, double amount)
+        public async Task<Guid> WithdrawMoneyAsync(Guid accountId, double amount)
         {
             if (amount <= 0)
             {
                 throw new ArgumentException("Amount must be greater than zero.");
             }
 
+            Guid transactionId = Guid.NewGuid();
+
             var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
             transactions.Add(new AccountTransaction()
             {
+                TransactionId = transactionId,
                 AccountId = accountId,
                 Amount = amount,
                 Date = DateTime.UtcNow,
@@ -68,6 +76,8 @@ namespace InterviewProject1
             await this.dbContext.SaveData(transactions);
 
             Console.WriteLine($"Withdrawal: {amount.ToString("C", CultureInfo.CurrentCulture)}");
+
+            return transactionId;
         }
 
         /// <inheritdoc/>
