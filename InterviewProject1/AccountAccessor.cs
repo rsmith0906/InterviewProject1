@@ -1,8 +1,6 @@
 ﻿using InterviewProject1.Interfaces;
 using InterviewProject1.Models;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text.Json;
 
 namespace InterviewProject1
 {
@@ -29,7 +27,7 @@ namespace InterviewProject1
         {
             if (amount <= 0)
             {
-                throw new ArgumentException("Amount must be greater than zero.");
+                throw new ArgumentException("Amount must be greater than zero.", nameof(amount));
             }
 
             Guid transactionId = Guid.NewGuid();
@@ -57,7 +55,7 @@ namespace InterviewProject1
         {
             if (amount <= 0)
             {
-                throw new ArgumentException("Amount must be greater than zero.");
+                throw new ArgumentException("Amount must be greater than zero.", nameof(amount));
             }
 
             Guid transactionId = Guid.NewGuid();

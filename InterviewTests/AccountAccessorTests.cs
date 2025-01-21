@@ -33,6 +33,28 @@ namespace InterviewTests
         }
 
         /// <summary>
+        /// Tests AccountAccessor AddDepositAsync with invalid deposit amount throws ArgumentException.
+        /// </summary>
+        [TestMethod]
+        public async Task Test_AccountAccessor_AddDepositAsync_ArgumentException()
+        {
+            // Arrange
+            IAccountAccessor accountAccessor = new AccountAccessor(new DbContext());
+
+            Guid accountId = Guid.NewGuid();
+            double invalidDepositAmount = 0;
+
+            // Act
+            ArgumentException exception = await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+               await accountAccessor.AddDepositAsync(accountId, invalidDepositAmount));
+
+            // Assert
+            // Assert
+            Assert.AreEqual("amount", exception.ParamName);
+            Assert.IsTrue(exception.Message.Contains("must be greater than", StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
         /// Tests AccountAccessor WithdrawMoneyAsync method.
         /// </summary>
         [TestMethod]
@@ -58,6 +80,28 @@ namespace InterviewTests
             Assert.AreEqual(transactionId, transaction.TransactionId);
             Assert.AreEqual(withdrawAmount, transaction.Amount);
             Assert.AreEqual(TransactionType.Withdrawal, transaction.TransactionType);
+        }
+
+        /// <summary>
+        /// Tests AccountAccessor WithdrawMoneyAsync with invalid Withdrawal amount throws ArgumentException.
+        /// </summary>
+        [TestMethod]
+        public async Task Test_AccountAccessor_WithdrawMoneyAsync_ArgumentException()
+        {
+            // Arrange
+            IAccountAccessor accountAccessor = new AccountAccessor(new DbContext());
+
+            Guid accountId = Guid.NewGuid();
+            double invalidWithdrawalAmount = 0;
+
+            // Act
+            ArgumentException exception = await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+               await accountAccessor.WithdrawMoneyAsync(accountId, invalidWithdrawalAmount));
+
+            // Assert
+            // Assert
+            Assert.AreEqual("amount", exception.ParamName);
+            Assert.IsTrue(exception.Message.Contains("must be greater than", StringComparison.OrdinalIgnoreCase));
         }
     }
 }
