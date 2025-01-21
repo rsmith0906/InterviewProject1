@@ -1,6 +1,8 @@
 # Developer Candidate Exercise: Simple Banking Application
 
-Welcome to the Developer Candidate Exercise! This project is designed to evaluate your problem-solving, debugging, and coding skills. You'll be working on a simple banking application that supports deposits and withdrawals. The starting point for this exercise is running the unit tests.
+Welcome to the Developer Candidate Exercise! This project is designed to evaluate your problem-solving, debugging, and coding skills. You'll be working on a simple banking application that supports deposits and withdrawals. 
+
+The starting point for this exercise is running the unit tests.  Based on the test failures the interviewee should diagnose why the failure happened and ensure all unit tests pass.  Once all tests pass run the console application to ensure it is operational.
 
 ---
 
