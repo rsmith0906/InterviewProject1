@@ -7,7 +7,7 @@ var diContainer = Startup.GetServiceProvider();
 
 var bankAccountManager = diContainer.GetRequiredService<BankAccountManager>();
 
-// Simulate a account account
+// Create Account Id
 Guid accountId = Guid.NewGuid();
 
 var startingBalance = await bankAccountManager.GetBalanceAsync(accountId);
