@@ -27,6 +27,11 @@ namespace InterviewProject1
         /// <inheritdoc/>
         public async Task AddDepositAsync(Guid accountId, double amount)
         {
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Amount must be greater than zero.");
+            }
+
             var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
             transactions.Add(new AccountTransaction()
@@ -44,6 +49,11 @@ namespace InterviewProject1
         /// <inheritdoc/>
         public async Task WithdrawMoneyAsync(Guid accountId, double amount)
         {
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Amount must be greater than zero.");
+            }
+
             var transactions = (List<AccountTransaction>)await this.dbContext.GetData<AccountTransaction>();
 
             transactions.Add(new AccountTransaction()
